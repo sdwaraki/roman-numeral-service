@@ -26,6 +26,7 @@ Table of Contents
 
 -   [Troubleshooting](#troubleshooting)
 
+
 * * * * *
 
 Features
@@ -43,6 +44,14 @@ Features
 -   **React UI**: Built with Adobe React Spectrum, supports light/dark toggle and responsive design.
 
 -   **Dockerized**: Single container serves both backend and frontend.
+
+* * * * *
+Modes
+--------
+
+![light_mode.png](src/main/resources/images/light_mode.png)
+
+![dark_mode.png](src/main/resources/images/dark_mode.png)
 
 * * * * *
 
