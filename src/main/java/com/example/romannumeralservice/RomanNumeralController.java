@@ -5,8 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 @RestController
 public class RomanNumeralController {
@@ -19,8 +22,11 @@ public class RomanNumeralController {
 
     @Timed("roman.numeral.requests")
     @GetMapping("/romannumeral")
-    public ResponseEntity<?> toRoman(@RequestParam("query") String queryStr) {
-        logger.debug("Received raw query={}", queryStr);
+    public ResponseEntity<?> toRoman(
+            @RequestParam("query") String queryStr,
+            @RequestHeader(value = "X-Request-ID", required = false) String requestId
+            ) {
+        logger.debug("Received raw query={} for requestId={}", queryStr, requestId);
         try {
             int query = Integer.parseInt(queryStr);
             String roman = converter.convert(query);

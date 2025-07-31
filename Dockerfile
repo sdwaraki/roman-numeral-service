@@ -1,6 +1,7 @@
 # ----------- Build Stage -----------
 FROM node:20 AS ui-build
 WORKDIR /ui
+COPY ui/package*.json ./ui/
 COPY ui/ ./ui/
 WORKDIR /ui/ui
 RUN npm install

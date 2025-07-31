@@ -9,6 +9,7 @@ import {
   TextField,
   Button
 } from '@adobe/react-spectrum';
+import { v4 as uuidv4 } from 'uuid';
 
 export default function App() {
   const [input, setInput] = useState('');
@@ -19,8 +20,21 @@ export default function App() {
   const theme = isDark ? darkTheme : defaultTheme;
 
   const convert = async () => {
+    //Generate a new UUID per request
+    const requestId = uuidv4();
+    console.log(requestId)
+
     try {
-      const res = await fetch(`/romannumeral?query=${input}`);
+      const res = await fetch(`/romannumeral?query=${input}`, {
+        method: 'GET',
+        headers: {
+          'X-Request-ID': requestId
+        }
+      });
+
+      const respRequestId = res.headers.get('X-Request-Id');
+      console.log('Backend requestId:', respRequestId);
+
       if (res.ok) {
         const { output: roman } = await res.json();
         setOutput(roman);
@@ -32,6 +46,7 @@ export default function App() {
       setOutput('Error contacting the conversion service.');
     }
   };
+
 
   return (
     <Provider theme={theme} colorScheme={isDark ? 'dark' : 'light'} locale={navigator.language}>
