@@ -60,13 +60,13 @@ Technologies
 
 | Layer | Technologies |
 | --- | --- |
-| **Backend** | Java 17, Spring Boot, Spring Web, Actuator, Micrometer (Prometheus), Sleuth (Zipkin) |
-| **Frontend** | React 19, Create React App, Adobe React Spectrum |
+| **Backend** | Java 17, Spring Boot, Spring Web, Actuator, Micrometer (Prometheus) |
+| **Frontend** | React 19, Adobe React Spectrum |
 | **Build & Deploy** | Maven, Node.js/npm, Docker multi-stage builds |
 
 * * * * *
 
-Prerequisites
+Prerequisites (for local dev setup)
 -------------
 
 -   Java 17 JDK or Docker
