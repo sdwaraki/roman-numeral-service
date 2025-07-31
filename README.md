@@ -170,7 +170,7 @@ docker logs -f roman-numeral-service
 
 ```
 
-A sample request log is as follows: It contains the timestamp, message and a requestId sent by the react app
+A sample request log is as follows: It contains the timestamp, message and a requestId (UUID) sent by the react app
 ```
 04:22:10.299 [http-nio-8080-exec-9] INFO  c.e.r.RomanNumeralController [9c53be59-244f-4cc0-972c-4f159b7377e0] - Converted 45 → XLV
 ```
@@ -215,7 +215,7 @@ Observability
      - Http server metrics : `http://localhost:8080/actuator/metrics/http.server.requests`
      - Health: `http://localhost:8080/actuator/health`
 
--  **Tracing**: Although not implemented here, the requestId from the front end could be used to trace the request from end to end. The same requestId is also present in the response headers as well which makes it convenient to trace the request out and back. 
+-  **Tracing**: Although not implemented here, the requestId (UUID) from the front end could be used to trace the request from end to end. The same requestId is also present in the response headers as well which makes it convenient to trace the request out and back. 
 
 * * * * *
 
