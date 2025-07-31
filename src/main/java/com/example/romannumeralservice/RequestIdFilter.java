@@ -4,6 +4,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
 import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -26,11 +27,16 @@ public class RequestIdFilter extends OncePerRequestFilter {
         }
 
         MDC.put(MDC_REQUEST_ID_KEY, requestId);
-
+        long time = System.currentTimeMillis();
+        Logger logger = org.slf4j.LoggerFactory.getLogger(RequestIdFilter.class);
         try {
             response.setHeader(REQUEST_ID_HEADER, requestId);
             filterChain.doFilter(request, response);
         } finally {
+            time = System.currentTimeMillis() - time;
+            if (request.getRequestURI() != null && request.getRequestURI().contains("/romannumeral")) {
+                logger.info("Request {} took: {} ms", requestId, time);
+            }
             MDC.remove(MDC_REQUEST_ID_KEY);
         }
     }
