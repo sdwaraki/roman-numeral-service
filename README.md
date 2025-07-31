@@ -152,11 +152,28 @@ Build and run a single container:
 
 ```
 docker build -t roman-numeral-service .
-docker run --rm -p 8080:8080 roman-numeral-service
+docker run --name roman-numeral-service --rm -p 8080:8080 roman-numeral-service &
 
 ```
 
 Visit [http://localhost:8080](http://localhost:8080/).
+
+To stop the container
+```
+docker stop roman-numeral-service
+
+```
+
+To view the logs
+```
+docker logs -f roman-numeral-service
+
+```
+
+A sample request log is as follows: It contains the timestamp, message, spanID and traceID
+```json
+{"@timestamp":"2025-07-31T02:59:30.33481051Z","@version":"1","message":"Received raw query=30","logger_name":"com.example.romannumeralservice.RomanNumeralController","thread_name":"http-nio-8080-exec-1","level":"DEBUG","level_value":10000,"traceId":"688adc12b9f583fe1f703019fb20771a","spanId":"1f703019fb20771a"}
+```
 
 * * * * *
 
@@ -194,8 +211,9 @@ Observability
 
 -   **Logs**: JSON output via Logback + Logstash encoder (`logback-spring.xml`).
 
--   **Metrics**: Prometheus endpoint at `/actuator/prometheus` (requires Micrometer + Actuator).
-
+-   **Metrics**: Prometheus endpoint at `/actuator/prometheus` (requires Micrometer + Actuator).
+     - Http server metrics : `http://localhost:8080/actuator/metrics/http.server.requests`
+     - Health: `http://localhost:8080/actuator/health`
 
 * * * * *
 
