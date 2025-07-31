@@ -170,9 +170,9 @@ docker logs -f roman-numeral-service
 
 ```
 
-A sample request log is as follows: It contains the timestamp, message, spanID and traceID
-```json
-{"@timestamp":"2025-07-31T02:59:30.33481051Z","@version":"1","message":"Received raw query=30","logger_name":"com.example.romannumeralservice.RomanNumeralController","thread_name":"http-nio-8080-exec-1","level":"DEBUG","level_value":10000,"traceId":"688adc12b9f583fe1f703019fb20771a","spanId":"1f703019fb20771a"}
+A sample request log is as follows: It contains the timestamp, message and a requestId sent by the react app
+```
+04:22:10.299 [http-nio-8080-exec-9] INFO  c.e.r.RomanNumeralController [9c53be59-244f-4cc0-972c-4f159b7377e0] - Converted 45 → XLV
 ```
 
 * * * * *
@@ -214,6 +214,8 @@ Observability
 -   **Metrics**: Prometheus endpoint at `/actuator/prometheus` (requires Micrometer + Actuator).
      - Http server metrics : `http://localhost:8080/actuator/metrics/http.server.requests`
      - Health: `http://localhost:8080/actuator/health`
+
+-  **Tracing**: Although not implemented here, the requestId from the front end could be used to trace the request from end to end. The same requestId is also present in the response headers as well which makes it convenient to trace the request out and back. 
 
 * * * * *
 
